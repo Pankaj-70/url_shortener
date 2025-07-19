@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import axios from 'axios';
+import createShortUrl from '../apis/createShortUrl';
 const UrlForm = () => {
     const [longUrl, setLongUrl] = useState('');
     const [shortUrl, setShortUrl] = useState(null);
@@ -7,9 +7,8 @@ const UrlForm = () => {
     const [copied, setCopied] = useState(false);
   const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post("http://localhost:3000/api/create", {url: longUrl});
-        console.log(response.data);
-        setShortUrl(response.data.shortUrl);
+        const shortUrl = await createShortUrl(longUrl);
+        setShortUrl(shortUrl);
     };
  const handleCopy = async () => {
     if (shortUrl) {
@@ -27,7 +26,8 @@ const UrlForm = () => {
           placeholder="Paste your long URL here..."
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
-          className="px-4 py-2 rounded-lg border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-base"
+          className="pconsole.log(response.data);
+        x-4 py-2 rounded-lg border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-base"
         />
         <button
           onClick={handleSubmit}
