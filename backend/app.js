@@ -4,30 +4,19 @@ import dotenv from 'dotenv';
 import connectDB from './src/config/mongodb.config.js';
 import urlSchema from './src/model/shortUrlSchema.model.js';
 import short_url from "./src/routes/shortUrl.route.js"
+import { redirectToLongUrl } from './src/controllers/shortUrl.controllers.js';
+import cors from 'cors';
 
 dotenv.config("./.env");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
 
 
 app.use('/api/create', short_url);
 
-app.get('/:id', async (req, res) => {
-    const {id} = req.params;
-    console.log(`Redirecting for short URL: ${id}`);
-    try {
-        const url = await urlSchema.findOne({short_url: id});
-        if (!url) {
-            return res.status(404).json({ error: 'URL not found' });
-        }
-        res.redirect(url.full_url);
-    } catch (error) {
-        console.error('Error fetching URL:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-})
+app.get('/:id', redirectToLongUrl)
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: 'Welcome to the URL Shortener API' });

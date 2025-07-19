@@ -9,6 +9,10 @@ export const saveShortUrl = async (shorturl, longUrl, userId) => {
         newUrl.user_id = userId;
     }
     await newUrl.save();
-    console.log(newUrl);
     return newUrl;
 }   
+
+export const getUrlById = async (id) => {
+    const url = await urlSchema.findOneAndUpdate({short_url: id}, { $inc: { clicks: 1 } });
+    return url;    
+}
