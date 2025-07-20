@@ -1,9 +1,8 @@
 import express from 'express';
-import { nanoid } from 'nanoid';
 import dotenv from 'dotenv';
 import connectDB from './src/config/mongodb.config.js';
-import urlSchema from './src/model/shortUrlSchema.model.js';
 import short_url from "./src/routes/shortUrl.route.js"
+import auth_route from './src/routes/auth.route.js';
 import { redirectToLongUrl } from './src/controllers/shortUrl.controllers.js';
 import cors from 'cors';
 
@@ -15,7 +14,7 @@ app.use(cors());
 
 
 app.use('/api/create', short_url);
-
+app.use('/api/auth', auth_route);
 app.get('/:id', redirectToLongUrl)
 
 app.get('/', (req, res) => {
