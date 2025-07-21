@@ -11,6 +11,7 @@ export const register_user = async (req, res) => {
     if (user) {
         return res.status(409).json({ error: "User already exists" });
     }
+    
     const token = await registerUser({ name, email, password });
     res.cookie("accessToken", token, cookieOptions);
     res.status(201).json({ message: "User registered successfully"});

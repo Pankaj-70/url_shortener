@@ -5,13 +5,16 @@ import short_url from "./src/routes/shortUrl.route.js"
 import auth_route from './src/routes/auth.route.js';
 import { redirectToLongUrl } from './src/controllers/shortUrl.controllers.js';
 import cors from 'cors';
+import cookieParser from 'cookie-parser'; 
+import { attachUser } from './src/middleware/attachUser.middleware.js';
 
 dotenv.config("./.env");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
+app.use(cookieParser());
+app.use(attachUser);
 
 app.use('/api/create', short_url);
 app.use('/api/auth', auth_route);
