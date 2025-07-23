@@ -1,6 +1,6 @@
 import { axiosInstance } from "../utils/axiosInstance";
-const createShortUrl = async (longUrl) => {
-    const response = await axiosInstance.post('/api/create', { url: longUrl });
+const createShortUrl = async (longUrl, slug) => {
+    const response = await axiosInstance.post('/api/create', { url: longUrl, slug });
     return response.data.shortUrl;
 };
 
