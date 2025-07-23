@@ -26,3 +26,13 @@ export const logoutUser = async() => {
         console.error("Error in logoutapi: ",error);
     }
 }
+
+export const getCurrentUser = async() => {
+    try {
+        const data = await axiosInstance.get("/api/auth/currentuser");
+        return data.data || null;
+    } catch (error) {
+        console.error("Error in getCurrentUser: ",error);
+        return null;
+    }
+}

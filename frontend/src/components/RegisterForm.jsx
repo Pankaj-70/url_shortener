@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { registerUser } from '../apis/authApis';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from '@tanstack/react-router';
+import { login } from '../store/slice/authSlice.js';
 
 const RegisterForm = ({ state }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleRegister = async () => {
      try {
          const data = await registerUser(name, email, password);
-         console.log(data);
+         dispatch(login(data.data.user));
+         navigate({ to: '/dashboard' });
      } catch (error) {
          console.error('Error in register: ',error);
      }

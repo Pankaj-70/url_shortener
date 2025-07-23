@@ -8,7 +8,6 @@ export const authMiddleware = async (req, res, next) => {
     }
     try {
         const decoded = verifyToken(token);
-        console.log("Decoded token:", decoded);
         const user = await findUserById(decoded.id);
         if(!user) {
             return res.status(404).json({ error: "User not found" });

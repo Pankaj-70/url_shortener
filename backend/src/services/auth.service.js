@@ -4,7 +4,7 @@ import { signToken, verifyToken } from "../utils/helper.js";
 export const registerUser = async ({name, email, password}) => {
     const newUser = await createUser({ name, email, password });
     const token = signToken({id: newUser._id});
-    return token;
+    return {token, user: { id: newUser._id, name: newUser.name, email: newUser.email }};
 }
 
 
