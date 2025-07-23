@@ -24,7 +24,7 @@ const DashBoardPage = () => {
           <p className="text-gray-500">No URL s found.</p>
         ) : (
           <ul className="space-y-3">
-            {urls?.map((url, idx) => (
+            {urls?.reverse().map((url, idx) => (
               <li key={idx} className="bg-indigo-50 rounded p-2 flex flex-col items-center">
                 <a
                   href={url}

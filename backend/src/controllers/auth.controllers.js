@@ -50,3 +50,19 @@ export const getCurrentUser = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+
+export const logoutUser = async (req, res) => {
+    try {
+        const user = req.user;
+        const token = req.cookies.accessToken;
+        if(!user) {
+            return res.status(401).json({error: "Unauthorized User"});
+        }
+        res.clearCookie("accessToken", token, cookieOptions);
+        res.status(200).json({message: "User logged out succesfully"});
+
+    } catch (error) {
+        console.error("Error in logout", error);
+        res.status(500).json({error: "Internal Server Error"});
+    }
+}
