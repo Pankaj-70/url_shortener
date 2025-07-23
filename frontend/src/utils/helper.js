@@ -12,7 +12,6 @@ export const checkAuth = async({context}) => {
         if(!user) {
             return redirect({to: '/auth'});
         }
-        console.log("User in checkAuth:", user);
         store.dispatch(login(user));
         const isAuthenticated = store.getState().auth.isAuthenticated;
         if(!isAuthenticated) {

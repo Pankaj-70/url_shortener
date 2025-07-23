@@ -9,7 +9,7 @@ export const createShortUrl = async (req, res) => {
             return res.status(401).json({ error: 'User is required to create a short URL' });
         }
         let shortUrl;
-        if(!slug) {
+        if(!user) {
             shortUrl = await createShortUrlWithoutUser(url);
         } else {
             shortUrl = await createShortUrlWithUser(slug, url, user.id);

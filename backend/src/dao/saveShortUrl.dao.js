@@ -20,3 +20,4 @@ export const getUrlById = async (id) => {
     const url = await urlSchema.findOneAndUpdate({short_url: id}, { $inc: { clicks: 1 } });
     return url;    
 }
+

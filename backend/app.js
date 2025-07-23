@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './src/config/mongodb.config.js';
 import short_url from "./src/routes/shortUrl.route.js"
 import auth_route from './src/routes/auth.route.js';
+import user_route from "./src/routes/user.route.js"
 import { redirectToLongUrl } from './src/controllers/shortUrl.controllers.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'; 
@@ -21,6 +22,7 @@ app.use(attachUser);
 
 app.use('/api/create', short_url);
 app.use('/api/auth', auth_route);
+app.use('/api/user', user_route);
 app.get('/:id', redirectToLongUrl)
 
 app.get('/', (req, res) => {
